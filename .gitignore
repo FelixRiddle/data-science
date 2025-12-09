@@ -11,6 +11,8 @@ __pycache__/
 build/
 develop-eggs/
 dist/
+# Folder to which easily downloaded files are located,
+# such that they don't have to be added to the repository.
 downloads/
 eggs/
 .eggs/
