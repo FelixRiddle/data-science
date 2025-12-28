@@ -18,6 +18,14 @@ def get_parser():
     example_cmd = subparsers.add_parser("example", help="Run an example")
     example_cmd.add_argument("-1", "--one", help="Example 1", action="store_true")
 
+    # Dataset downloader subcommand
+    dataset_cmd = subparsers.add_parser("dataset", help="Download a dataset")
+    dataset_cmd.add_argument(
+        "url", help="The Google Drive share link"
+    )  # Positional argument
+    dataset_cmd.add_argument("--id", help="File id")
+    dataset_cmd.add_argument("--filename", help="Filename")
+
     args = parser.parse_args()
 
-    return parser
+    return args
