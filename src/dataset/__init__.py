@@ -1,6 +1,8 @@
 import re
 import gdown
 import os
+from pathlib import Path
+import shutil
 
 
 def extract_file_id(url: str):
@@ -12,7 +14,7 @@ def extract_file_id(url: str):
     return None
 
 
-def download_dataset(file_id: str, filename: str):
+def download_dataset_by_id(file_id: str, filename: str):
     """Download dataset from Google Drive"""
     # Google Drive download URL template
     url = f"https://drive.google.com/uc?id={file_id}"
@@ -45,3 +47,32 @@ def download_dataset_from_url(url: str):
     downloaded_path = gdown.download(download_url, None, quiet=False)
 
     print(f"Successfully downloaded: {downloaded_path}")
+
+
+def download_dataset(url: str, dest_dir=Path("data/raw")):
+    # Extract the ID from the link using Regex
+    file_id = extract_file_id(url)
+    if not file_id:
+        print("Error: Invalid Google Drive URL.")
+        return
+
+    # Direct download URL for gdown
+    download_url = f"https://drive.google.com/uc?id={file_id}"
+
+    print(f"Connecting to Google Drive (ID: {file_id})...")
+
+    # download() returns the path of the downloaded file
+    filename = gdown.download(download_url, None, quiet=False)
+
+    print(f"Successfully downloaded: {filename}")
+
+    if filename:
+        # Define final destination path
+        final_path = dest_dir / filename
+
+        # Move the file (shutil.move works across different filesystems too)
+        shutil.move(filename, final_path)
+
+        print(f"Successfully moved dataset to: {final_path}")
+    else:
+        print("Error: Download failed or filename could not be determined.")

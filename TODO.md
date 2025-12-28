@@ -4,7 +4,7 @@
 
 ## Dataset
 
-- [ ] Download datasets
-	- [ ] Place them on the data/raw folder
+- [x] Download datasets
+	- [x] Place them on the data/raw folder
 
 - [ ] Dataset loader
