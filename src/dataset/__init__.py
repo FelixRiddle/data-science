@@ -1,6 +1,7 @@
 import re
 import gdown
 import os
+import pandas as pd
 from pathlib import Path
 import shutil
 
@@ -76,3 +77,23 @@ def download_dataset(url: str, dest_dir=Path("data/raw")):
         print(f"Successfully moved dataset to: {final_path}")
     else:
         print("Error: Download failed or filename could not be determined.")
+
+
+def load_dataset(filename: str, source_dir=Path("data/raw")):
+    """
+    Reads a dataset from the local storage and returns a Pandas DataFrame.
+    """
+    file_path = source_dir / filename
+
+    if not file_path.exists():
+        print(f"Error: The file {file_path} does not exist.")
+        return None
+
+    try:
+        # For CSV files
+        df = pd.read_csv(file_path)
+        print(f"Successfully loaded {filename}. Shape: {df.shape}")
+        return df
+    except Exception as e:
+        print(f"An error occurred while reading the file: {e}")
+        return None

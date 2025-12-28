@@ -2,6 +2,7 @@ from pathlib import Path
 from .cli import get_parser
 from dataset import download_dataset_by_id
 from dataset import download_dataset
+from .examples import example1
 
 def main():
 	"""Run CLI"""
@@ -15,7 +16,7 @@ def main():
 
 	if args.command == "example":
 		if args.one:
-			print("Example 1")
+			example1.main()
 
 	if args.command == "dataset":
 		print("Dataset downloader")
