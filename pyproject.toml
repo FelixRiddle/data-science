@@ -1,0 +1,9 @@
+[project]
+name = "cli"
+version = "0.1.0"
+dependencies = []
+
+[project.scripts]
+cli = "cli.__main__:main"
+perseverancia = "cli.__main__:main"
+psv = "cli.__main__:main"
