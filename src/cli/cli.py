@@ -20,9 +20,11 @@ def get_parser():
 
     # Dataset downloader subcommand
     dataset_cmd = subparsers.add_parser("dataset", help="Download a dataset")
+    # Positional argument
     dataset_cmd.add_argument(
         "url", help="The Google Drive share link"
-    )  # Positional argument
+    )
+    # Optional Arguments
     dataset_cmd.add_argument("--id", help="File id")
     dataset_cmd.add_argument("--filename", help="Filename")
 
